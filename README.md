@@ -1,10 +1,14 @@
 # QtDatabaseAccessorSingleton
-"Skeleton" Database Accessor in a separate thread
----
+### "Skeleton" Database Accessor in a separate thread
+
+```
+config.ini
+
 [CONNECT]
 IP=localhost
 DataBase=postgres
 UserName=postgres
-PassWord=izegez69
+PassWord=
 Port=5433
 DataBaseType=QPSQL
+```
