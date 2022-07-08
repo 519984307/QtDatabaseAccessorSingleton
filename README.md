@@ -1,2 +1,2 @@
 # QtDatabaseAccessorSingleton
-Template Database Accessor witch threads
+Template Database Accessor with threads
