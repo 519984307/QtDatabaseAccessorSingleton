@@ -7,19 +7,12 @@ DatabaseAccessor::DatabaseAccessor(){
     QString pathConfig = QDir::currentPath() + "/config.ini";
     QSettings setting(pathConfig, QSettings::IniFormat);
 
-    QString IP           = setting.value("CONNECT/IP").toString();
-    QString DataBase     = setting.value("CONNECT/DataBase").toString();
-    QString UserName     = setting.value("CONNECT/UserName").toString();
-    QString PassWord     = setting.value("CONNECT/PassWord").toString();
-    QString DataBaseType = setting.value("CONNECT/DataBaseType").toString();
-    int Port             = setting.value("CONNECT/Port").toInt();
-
-    dbHostName           = IP;
-    dbName               = DataBase;
-    dbUserName           = UserName;
-    dbPassword           = PassWord;
-    dbType               = DataBaseType;
-    dbPort               = Port;
+    dbHostName = setting.value("CONNECT/IP").toString();
+    dbName     = setting.value("CONNECT/DataBase").toString();
+    dbUserName = setting.value("CONNECT/UserName").toString();
+    dbPassword = setting.value("CONNECT/PassWord").toString();
+    dbType     = setting.value("CONNECT/DataBaseType").toString();
+    dbPort     = setting.value("CONNECT/Port").toInt();
 
     sDBPtr = QSqlDatabase::addDatabase(dbType);
 
@@ -51,7 +44,7 @@ void DatabaseAccessor::executeSqlQuery(QString query){
         while (sqlQuery.next()){
             qDebug() << "thread1 value:" << sqlQuery.value(0).toString();
         }
-        QThread::msleep(1000);
+        QThread::msleep(10);
         i++;
     }
 }
