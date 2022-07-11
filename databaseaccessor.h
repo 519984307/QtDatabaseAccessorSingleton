@@ -4,13 +4,17 @@
 #include <QString>
 #include <QtSql>
 #include <QSqlQuery>
+#include <QVector>
+#include <QVariant>
+#include <QFuture>
+#include <QtConcurrent/QtConcurrentRun>
 
 /// @class DatabaseAccessor  - singleton database accessor
 class DatabaseAccessor : public QObject{
     Q_OBJECT
 public:
     static DatabaseAccessor* getInstance();
-
+    static QVector<QVector<QVariant>> executeSqlQuery(const QString&);
     /// BD information
     QString dbHostName;
     QString dbName;
@@ -27,7 +31,7 @@ private:
     static QMutex sDBMutex;
 
 public slots:
-    void executeSqlQuery(QString);
+
 signals:
     void finished();
 };

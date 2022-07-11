@@ -11,12 +11,13 @@ class DatabaseThread : public QThread{
     Q_OBJECT
 public:
     DatabaseThread();
-
-protected slots:
-    void process();
-
+    void setQuery(const QString&);
+    QVector<QVector<QVariant>> getData();
 signals:
     void executeSqlQuery(QString);
+private:
+    QVector<QVector<QVariant>> result;
+    QString mQuery;
 };
 
 #endif // DATABASETHREAD_H

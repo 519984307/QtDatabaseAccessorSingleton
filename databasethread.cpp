@@ -1,16 +1,16 @@
 #include "databasethread.h"
 
 DatabaseThread::DatabaseThread(){
-    connect(this, SIGNAL(executeSqlQuery(QString)),
-            DatabaseAccessor::getInstance(), SLOT(executeSqlQuery(QString)));
 
-    QThread* thread = new QThread;
-    DatabaseAccessor::getInstance()->moveToThread(thread);
-    connect(thread, SIGNAL(started()), this, SLOT(process()));
-    thread->start();
 }
 
-void DatabaseThread::process(){
-    emit executeSqlQuery("SELECT login FROM users");
+void DatabaseThread::setQuery(const QString& query){
+    QFuture<QVector<QVector<QVariant>>> future = QtConcurrent::run(DatabaseAccessor::executeSqlQuery, QString(query));
+    future.waitForFinished();
+    result = future.result();
+}
+
+QVector<QVector<QVariant>> DatabaseThread::getData(){
+    return result;
 }
 

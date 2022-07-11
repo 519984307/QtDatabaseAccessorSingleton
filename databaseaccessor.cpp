@@ -33,20 +33,21 @@ DatabaseAccessor* DatabaseAccessor::getInstance(){
     return &instance;
 }
 
-void DatabaseAccessor::executeSqlQuery(QString query){
-    int i = 0;
+QVector<QVector<QVariant>> DatabaseAccessor::executeSqlQuery(const QString& query){
+    QVector<QVector<QVariant>> result;
+    QSqlQuery sqlQuery( DatabaseAccessor::getInstance()->sDBPtr);
+    sqlQuery.exec(query);
 
-    emit finished();
-    while (i < 10000){
-        QSqlQuery sqlQuery(sDBPtr);
-        sqlQuery.exec(query);
-
-        while (sqlQuery.next()){
-            qDebug() << "thread1 value:" << sqlQuery.value(0).toString();
+    while(sqlQuery.next()){
+        QVector<QVariant> collum;
+        for(int j = 0; j < sqlQuery.record().count(); j++){
+            collum.append(sqlQuery.value(j));
         }
-        QThread::msleep(10);
-        i++;
+        result.append(collum);
     }
+    qDebug() << "QThread: " << QThread::currentThread();
+
+    return result;
 }
 
 
