@@ -8,10 +8,10 @@ DatabaseAccessor::DatabaseAccessor(){
     QSettings setting(pathConfig, QSettings::IniFormat);
 
     dbHostName = setting.value("CONNECT/IP").toString();
-    dbName     = setting.value("CONNECT/DataBase").toString();
-    dbUserName = setting.value("CONNECT/UserName").toString();
-    dbPassword = setting.value("CONNECT/PassWord").toString();
-    dbType     = setting.value("CONNECT/DataBaseType").toString();
+    dbName     = setting.value("CONNECT/Database").toString();
+    dbUserName = setting.value("CONNECT/Username").toString();
+    dbPassword = setting.value("CONNECT/Password").toString();
+    dbType     = setting.value("CONNECT/DatabaseType").toString();
     dbPort     = setting.value("CONNECT/Port").toInt();
 
     sDBPtr = QSqlDatabase::addDatabase(dbType);
