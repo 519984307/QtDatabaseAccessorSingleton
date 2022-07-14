@@ -6,9 +6,9 @@ config.ini
 
 [CONNECT]
 IP=localhost
-DataBase=postgres
-UserName=postgres
-PassWord=
+Database=postgres
+Username=postgres
+Password=
 Port=5433
-DataBaseType=QPSQL
+DatabaseType=QPSQL
 ```
